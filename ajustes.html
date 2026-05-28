@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1366">
+  <title>Burbojito — Configurações</title>
+  <link rel="icon" type="image/jpeg" href="assets/images/logo.jpeg">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body data-page="ajustes">
+
+  <div id="app-shell" class="app-shell">
+
+    <!-- ── Sidebar ──────────────────────────────────── -->
+    <aside class="sidebar" id="sidebar" aria-label="Navegação principal">
+      <div class="sidebar__header">
+        <button
+          type="button"
+          class="sidebar__toggle"
+          id="btn-sidebar-toggle"
+          aria-label="Alternar menu lateral"
+          aria-expanded="true"
+        >
+          <svg width="18" height="14" viewBox="0 0 18 14" fill="none" aria-hidden="true">
+            <rect y="0"  width="18" height="2" rx="1" fill="currentColor"/>
+            <rect y="6"  width="18" height="2" rx="1" fill="currentColor"/>
+            <rect y="12" width="18" height="2" rx="1" fill="currentColor"/>
+          </svg>
+        </button>
+        <div class="sidebar__logo">
+          <img src="assets/images/logo.jpeg" alt="" class="sidebar__logo-img" aria-hidden="true">
+          <span class="sidebar__logo-text">
+            BURB<span class="logo-blue">O</span>JIT<span class="logo-orange">O</span>
+          </span>
+        </div>
+      </div>
+
+      <nav class="sidebar__nav">
+        <div class="sidebar__section">
+          <a href="tablero.html" class="nav-item" data-route="tablero">
+            <span class="nav-item__icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                <rect x="1" y="1" width="7" height="7" rx="1.5" fill="currentColor"/>
+                <rect x="12" y="1" width="7" height="7" rx="1.5" fill="currentColor"/>
+                <rect x="1" y="12" width="7" height="7" rx="1.5" fill="currentColor"/>
+                <rect x="12" y="12" width="7" height="7" rx="1.5" fill="currentColor"/>
+              </svg>
+            </span>
+            <span class="nav-item__label">Painel</span>
+          </a>
+        </div>
+
+        <div class="sidebar__section">
+          <p class="sidebar__section-label">Pacientes</p>
+          <a href="pacientes.html" class="nav-item" data-route="pacientes">
+            <span class="nav-item__icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                <circle cx="10" cy="6" r="4" fill="currentColor"/>
+                <path d="M2 17c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+              </svg>
+            </span>
+            <span class="nav-item__label">Pacientes</span>
+          </a>
+          <a href="notificacoes.html" class="nav-item" data-route="notificacoes">
+            <span class="nav-item__icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                <path d="M10 2a6 6 0 0 0-6 6v3l-1.5 2.5H17.5L16 11V8a6 6 0 0 0-6-6Z" fill="currentColor"/>
+                <path d="M8 16a2 2 0 0 0 4 0" stroke="currentColor" stroke-width="1.5" fill="none"/>
+              </svg>
+            </span>
+            <span class="nav-item__label">Notificações</span>
+          </a>
+        </div>
+
+        <div class="sidebar__section">
+          <p class="sidebar__section-label">Meu Perfil</p>
+          <a href="ajustes.html" class="nav-item" data-route="ajustes">
+            <span class="nav-item__icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                <circle cx="10" cy="10" r="2.5" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M10 1v2M10 17v2M1 10h2M17 10h2M3.22 3.22l1.41 1.41M15.36 15.36l1.42 1.42M3.22 16.78l1.41-1.41M15.36 4.64l1.42-1.42"
+                  stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <span class="nav-item__label">Configurações</span>
+          </a>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- ── Main content ──────────────────────────────── -->
+    <main class="main-content">
+      <section class="page-section" aria-label="Perfil do usuário">
+        <h1 class="profile-page__title">Perfil do Usuário</h1>
+
+        <div id="profile-alert" class="alert alert--success hidden" role="alert" aria-live="polite"></div>
+
+        <div class="profile-avatar" aria-hidden="true"></div>
+
+        <form id="profile-form" class="profile-form" novalidate>
+          <div class="profile-form__row">
+            <div class="form-group">
+              <label for="profile-nome" class="form-group__label">Nome</label>
+              <input id="profile-nome" type="text" class="form-group__input" autocomplete="given-name">
+            </div>
+            <div class="form-group">
+              <label for="profile-sobrenome" class="form-group__label">Sobrenome</label>
+              <input id="profile-sobrenome" type="text" class="form-group__input" autocomplete="family-name">
+            </div>
+          </div>
+
+          <div class="profile-form__row">
+            <div class="form-group">
+              <label for="profile-email" class="form-group__label">Email</label>
+              <input id="profile-email" type="email" class="form-group__input" autocomplete="email">
+            </div>
+            <div class="form-group">
+              <label for="profile-username" class="form-group__label">Username</label>
+              <input id="profile-username" type="text" class="form-group__input" autocomplete="username">
+            </div>
+          </div>
+
+          <div class="profile-form__row">
+            <div class="form-group">
+              <label for="profile-telefone" class="form-group__label">Telefone</label>
+              <input id="profile-telefone" type="tel" class="form-group__input" autocomplete="tel">
+            </div>
+            <div class="form-group profile-form__password-group">
+              <label for="profile-password-display" class="form-group__label">Senha</label>
+              <input
+                id="profile-password-display"
+                type="password"
+                class="form-group__input"
+                value="placeholder_password"
+                readonly
+                aria-describedby="change-password-link"
+              >
+              <button
+                type="button"
+                id="change-password-link"
+                class="profile-form__change-password text-link"
+              >
+                Alterar a senha
+              </button>
+            </div>
+          </div>
+
+          <div class="profile-form__actions">
+            <button type="submit" class="btn btn--save" id="btn-save-profile">
+              SALVAR ALTERAÇÕES
+            </button>
+            <button type="button" class="btn btn--danger" id="btn-logout">
+              DESCONECTE-SE
+            </button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+  </div>
+
+  <!-- Change Password Modal -->
+  <div
+    id="modal-change-password"
+    class="modal-overlay hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-pwd-title"
+  >
+    <div class="modal">
+      <h2 class="modal__title" id="modal-pwd-title">Alterar senha</h2>
+
+      <div id="modal-pwd-alert" class="alert alert--error hidden" aria-live="polite"></div>
+
+      <div class="form-group">
+        <label for="modal-current-pwd" class="form-group__label">Senha atual</label>
+        <input id="modal-current-pwd" type="password" class="form-group__input">
+      </div>
+      <div class="form-group">
+        <label for="modal-new-pwd" class="form-group__label">Nova senha</label>
+        <input id="modal-new-pwd" type="password" class="form-group__input">
+      </div>
+      <div class="form-group">
+        <label for="modal-confirm-pwd" class="form-group__label">Confirmar nova senha</label>
+        <input id="modal-confirm-pwd" type="password" class="form-group__input">
+      </div>
+
+      <div class="modal__actions">
+        <button type="button" class="btn btn--secondary" id="btn-modal-cancel">Cancelar</button>
+        <button type="button" class="btn btn--save"      id="btn-modal-save">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/features/profile/profile.js"></script>
+</body>
+</html>

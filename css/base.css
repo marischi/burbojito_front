@@ -1,0 +1,36 @@
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-page);
+  min-width: 1366px;
+}
+
+h1 { font-size: var(--font-size-2xl); font-weight: var(--font-weight-bold); }
+h2 { font-size: var(--font-size-xl);  font-weight: var(--font-weight-bold); }
+h3 { font-size: var(--font-size-lg);  font-weight: var(--font-weight-semibold); }
+
+p  { color: var(--color-text-secondary); }
+
+strong { font-weight: var(--font-weight-semibold); }
+
+:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.hidden {
+  display: none !important;
+}

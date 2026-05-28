@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1366">
+  <title>Burbojito — Login</title>
+  <link rel="icon" type="image/jpeg" href="assets/images/logo.jpeg">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+  <div class="login-page">
+    <div class="login-card">
+      <img
+        src="assets/images/logo.jpeg"
+        alt="Burbojito"
+        class="login-card__logo"
+      >
+
+      <form id="login-form" class="login-card__form" novalidate>
+        <div id="login-alert" class="alert alert--error hidden" role="alert" aria-live="polite"></div>
+
+        <div class="form-group">
+          <label for="login-email" class="form-group__label">E-mail</label>
+          <input
+            id="login-email"
+            type="email"
+            class="form-group__input"
+            autocomplete="email"
+            required
+          >
+          <span id="login-email-error" class="form-group__error" aria-live="polite"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="login-password" class="form-group__label">Senha</label>
+          <input
+            id="login-password"
+            type="password"
+            class="form-group__input"
+            placeholder="••••••••••••••••"
+            autocomplete="current-password"
+            required
+          >
+          <span id="login-password-error" class="form-group__error" aria-live="polite"></span>
+        </div>
+
+        <button
+          type="button"
+          class="text-link login-card__forgot"
+          id="btn-forgot-password"
+        >
+          Esqueci minha senha
+        </button>
+
+        <button type="submit" class="btn btn--primary" id="btn-login">
+          ENTRAR
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="js/features/login/login.js"></script>
+</body>
+</html>

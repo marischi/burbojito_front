@@ -1,0 +1,180 @@
+/* ── Login layout ─────────────────────────────────────── */
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(--color-bg-white);
+}
+
+/* ── App shell ────────────────────────────────────────── */
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ── Sidebar ──────────────────────────────────────────── */
+.sidebar {
+  width: var(--sidebar-width);
+  min-width: var(--sidebar-width);
+  background-color: var(--color-bg-sidebar);
+  border-right: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: width var(--transition-normal);
+  z-index: 100;
+}
+
+.sidebar.is-collapsed {
+  width: var(--sidebar-width-collapsed);
+}
+
+.sidebar__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  min-height: 64px;
+}
+
+.sidebar__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  color: var(--color-text-secondary);
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.sidebar__toggle:hover {
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-page);
+}
+
+.sidebar__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.sidebar__logo-img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.sidebar__logo-text {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.5px;
+  color: var(--color-text-primary);
+  transition: opacity var(--transition-normal);
+}
+
+.sidebar__logo-text .logo-blue   { color: var(--color-brand-blue); }
+.sidebar__logo-text .logo-orange { color: var(--color-brand-orange); }
+
+.sidebar.is-collapsed .sidebar__logo-text,
+.sidebar.is-collapsed .sidebar__section-label,
+.sidebar.is-collapsed .nav-item__label {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── Sidebar nav ──────────────────────────────────────── */
+.sidebar__nav {
+  padding: var(--space-4) 0;
+  flex: 1;
+}
+
+.sidebar__section {
+  margin-bottom: var(--space-2);
+}
+
+.sidebar__section-label {
+  padding: var(--space-3) var(--space-4) var(--space-1);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: opacity var(--transition-normal);
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  border-radius: 0;
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+  white-space: nowrap;
+}
+
+.nav-item:hover {
+  background-color: var(--color-bg-page);
+  color: var(--color-text-primary);
+}
+
+.nav-item.is-active {
+  color: var(--color-brand-orange);
+}
+
+.nav-item.is-active .nav-item__icon {
+  color: var(--color-brand-orange);
+}
+
+.nav-item__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--color-text-secondary);
+  transition: color var(--transition-fast);
+}
+
+.nav-item.is-active .nav-item__icon { color: var(--color-brand-orange); }
+.nav-item:hover    .nav-item__icon  { color: var(--color-text-primary); }
+
+.nav-item__label {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  transition: opacity var(--transition-normal);
+}
+
+/* ── Main content ─────────────────────────────────────── */
+.main-content {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  min-height: 100vh;
+  background-color: var(--color-bg-white);
+  transition: margin-left var(--transition-normal);
+}
+
+.app-shell.sidebar-collapsed .main-content {
+  margin-left: var(--sidebar-width-collapsed);
+}
+
+.page-section {
+  padding: var(--space-8) var(--space-8);
+  min-height: 100vh;
+}
