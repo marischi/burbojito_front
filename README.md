@@ -39,7 +39,7 @@ O projeto foi organizado utilizando separação por responsabilidades, visando m
  ┣ 📁 icons
  ┣ 📁 images
  ┃ ┣ 📄 exemplo-relatorio.jpeg
- ┃ ┣ 📄 logo.jpeg
+ ┃ ┣ 📄 logo.png
  ┃ ┗ 📄 mapa-brasil.jpeg
  ┣ 📁 css
  ┃ ┣ 📄 base.css
