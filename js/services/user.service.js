@@ -8,41 +8,48 @@ import { getCurrentUser, refreshSessionUser } from './auth.service.js';
 
 const SIMULATED_DELAY_MS = 500;
 
+export const API_BASE_URL = window.APP_CONFIG?.API_URL || 'http://localhost:8000/api/';
+export const USERS_ENDPOINT = `${API_BASE_URL}user/`;
+
 function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 /**
  * Returns the profile of the currently authenticated user.
- * @returns {Promise<{id: number, nome: string, sobrenome: string, email: string, username: string, telefone: string}>}
+ * @returns {Promise<{id: number, name: string, email: string, username: string, phone: string}>}
  */
 export async function getProfile() {
-  await delay(SIMULATED_DELAY_MS);
+  // await delay(SIMULATED_DELAY_MS);
   const user = getCurrentUser();
+  console.log('Current user from getProfile:', user);
   if (!user) throw new Error('Usuário não autenticado.');
   return { ...user };
 }
 
 /**
  * Updates the profile of the currently authenticated user.
- * @param {{nome: string, sobrenome: string, email: string, username: string, telefone: string}} data
+ * @param {{name: string, email: string, username: string, phone_number: string, role: string}} data
  * @returns {Promise<object>} Updated user profile
  */
 export async function updateProfile(data) {
-  await delay(SIMULATED_DELAY_MS);
+  // await delay(SIMULATED_DELAY_MS);
 
   const user = getCurrentUser();
   if (!user) throw new Error('Usuário não autenticado.');
 
-  const mockUser = MOCK_USERS.find(u => u.id === user.id);
-  if (mockUser) {
-    Object.assign(mockUser, {
-      nome:      data.nome,
-      sobrenome: data.sobrenome,
-      email:     data.email,
-      username:  data.username,
-      telefone:  data.telefone,
+  // const mockUser = MOCK_USERS.find(u => u.id === user.id);
+    const response = await fetch(`${USERS_ENDPOINT}${user.id}/update/`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
     });
+    
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.detail || 'Erro ao atualizar perfil.');
   }
 
   const updatedUser = { ...user, ...data };

@@ -172,10 +172,24 @@
   box-shadow: var(--shadow-md);
 }
 
+.patients-report-panel__frame,
 .patients-report-panel__img {
   width: 100%;
-  height: auto;
+  height: 72vh;
+  min-height: 560px;
   display: block;
+  border: 0;
+  background: #fff;
+}
+
+.patients-report-panel__open-link {
+  display: inline-flex;
+  align-items: center;
+  margin: var(--space-3);
+  color: var(--color-accent-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
 }
 
 /* ════════════════════════════════════════════════════════

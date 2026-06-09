@@ -53,7 +53,7 @@ function renderPatientList(patients) {
   `).join('');
 
   listEl.querySelectorAll('.patient-item').forEach(item => {
-    item.addEventListener('click', () => handlePatientClick(Number(item.dataset.patientId)));
+    item.addEventListener('click', () => handlePatientClick(String(item.dataset.patientId)));
   });
 }
 
@@ -66,7 +66,7 @@ async function handlePatientClick(patientId) {
 
 function updateSelectedState() {
   document.querySelectorAll('.patient-item').forEach(item => {
-    const isSelected = Number(item.dataset.patientId) === selectedPatientId;
+    const isSelected = String(item.dataset.patientId) === selectedPatientId;
     item.classList.toggle('is-selected', isSelected);
     item.setAttribute('aria-selected', String(isSelected));
   });
@@ -77,17 +77,20 @@ async function loadPatientReport(patientId) {
   panelEl.innerHTML = `<div class="loading-state"><span class="spinner"></span><span>Carregando relatório...</span></div>`;
 
   try {
-    const imageUrl = await getPatientReport(patientId);
+    const reportUrl = await getPatientReport(patientId);
     const patient  = allPatients.find(p => p.id === patientId);
-    const altText  = patient ? `Relatório de ${patient.nome}` : 'Relatório do paciente';
+    const titleText = patient ? `Relatório de ${patient.nome}` : 'Relatório do paciente';
 
     panelEl.innerHTML = `
       <div class="patients-report-panel__report">
-        <img
-          src="${imageUrl}"
-          alt="${escapeText(altText)}"
-          class="patients-report-panel__img"
-        >
+        <iframe
+          src="${escapeText(reportUrl)}"
+          title="${escapeText(titleText)}"
+          class="patients-report-panel__frame"
+        ></iframe>
+        <a href="${escapeText(reportUrl)}" target="_blank" rel="noreferrer" class="patients-report-panel__open-link">
+          Abrir PDF em nova aba
+        </a>
       </div>
     `;
   } catch {

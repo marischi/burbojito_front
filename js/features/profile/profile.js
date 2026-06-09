@@ -36,11 +36,11 @@ async function loadProfile() {
 }
 
 function populateForm(profile) {
-  getById('profile-nome').value      = profile.nome      ?? '';
+  getById('profile-name').value      = profile.name      ?? '';
   getById('profile-sobrenome').value = profile.sobrenome ?? '';
   getById('profile-email').value     = profile.email     ?? '';
   getById('profile-username').value  = profile.username  ?? '';
-  getById('profile-telefone').value  = profile.telefone  ?? '';
+  getById('profile-phone').value  = profile.phone_number  ?? '';
 }
 
 function bindHandlers() {
@@ -70,11 +70,11 @@ async function handleSaveProfile(event) {
   saveBtn.textContent = 'Salvando...';
 
   const data = {
-    nome:      getById('profile-nome').value.trim(),
+    name:      getById('profile-name').value.trim(),
     sobrenome: getById('profile-sobrenome').value.trim(),
     email:     getById('profile-email').value.trim(),
     username:  getById('profile-username').value.trim(),
-    telefone:  getById('profile-telefone').value.trim(),
+    phone_number:  getById('profile-phone').value.trim(),
   };
 
   try {
