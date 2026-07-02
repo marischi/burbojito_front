@@ -1,25 +1,35 @@
 /**
  * User profile service.
- * Replace with real fetch calls when backend is ready.
  */
 
-import { MOCK_USERS } from '../../mock/mock-data.js';
+import { apiGet, apiPut } from './api.client.js';
 import { getCurrentUser, refreshSessionUser } from './auth.service.js';
-
-const SIMULATED_DELAY_MS = 500;
-
-function delay(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+import { normalizeUser } from './api.adapters.js';
 
 /**
  * Returns the profile of the currently authenticated user.
  * @returns {Promise<{id: number, nome: string, sobrenome: string, email: string, username: string, telefone: string}>}
  */
 export async function getProfile() {
-  await delay(SIMULATED_DELAY_MS);
   const user = getCurrentUser();
   if (!user) throw new Error('Usuário não autenticado.');
+
+  if (user.id) {
+    const response = await apiGet('/api/user/');
+    const users = Array.isArray(response)
+      ? response
+      : (response?.results ?? response?.data ?? []);
+
+    const match = users
+      .map(normalizeUser)
+      .find(item => String(item.id) === String(user.id));
+
+    if (match) {
+      refreshSessionUser(match);
+      return match;
+    }
+  }
+
   return { ...user };
 }
 
@@ -29,44 +39,37 @@ export async function getProfile() {
  * @returns {Promise<object>} Updated user profile
  */
 export async function updateProfile(data) {
-  await delay(SIMULATED_DELAY_MS);
-
   const user = getCurrentUser();
-  if (!user) throw new Error('Usuário não autenticado.');
+  if (!user?.id) throw new Error('Usuário não autenticado.');
 
-  const mockUser = MOCK_USERS.find(u => u.id === user.id);
-  if (mockUser) {
-    Object.assign(mockUser, {
-      nome:      data.nome,
-      sobrenome: data.sobrenome,
-      email:     data.email,
-      username:  data.username,
-      telefone:  data.telefone,
-    });
-  }
+  const response = await apiPut(`/api/user/${user.id}/update/`, {
+    nome: data.nome,
+    sobrenome: data.sobrenome,
+    email: data.email,
+    username: data.username,
+    telefone: data.telefone,
+  });
 
-  const updatedUser = { ...user, ...data };
+  const updatedUser = normalizeUser(response?.user ?? response ?? { ...user, ...data });
   refreshSessionUser(updatedUser);
-  return { ...updatedUser };
+  return updatedUser;
 }
 
 /**
  * Changes the user's password.
- * Validates current password before accepting the new one.
  * @param {string} currentPassword
  * @param {string} newPassword
  * @returns {Promise<void>}
  */
 export async function changePassword(currentPassword, newPassword) {
-  await delay(SIMULATED_DELAY_MS);
-
   const user = getCurrentUser();
-  if (!user) throw new Error('Usuário não autenticado.');
+  if (!user?.id) throw new Error('Usuário não autenticado.');
 
-  const mockUser = MOCK_USERS.find(u => u.id === user.id);
-  if (!mockUser || mockUser.password !== currentPassword) {
-    throw new Error('Senha atual incorreta.');
-  }
-
-  mockUser.password = newPassword;
+  await apiPut(`/api/user/${user.id}/update/`, {
+    current_password: currentPassword,
+    new_password: newPassword,
+    password: newPassword,
+    senha_atual: currentPassword,
+    senha_nova: newPassword,
+  });
 }

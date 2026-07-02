@@ -53,12 +53,12 @@ function renderPatientList(patients) {
   `).join('');
 
   listEl.querySelectorAll('.patient-item').forEach(item => {
-    item.addEventListener('click', () => handlePatientClick(Number(item.dataset.patientId)));
+    item.addEventListener('click', () => handlePatientClick(item.dataset.patientId));
   });
 }
 
 async function handlePatientClick(patientId) {
-  if (selectedPatientId === patientId) return;
+  if (String(selectedPatientId) === String(patientId)) return;
   selectedPatientId = patientId;
   updateSelectedState();
   await loadPatientReport(patientId);
@@ -66,7 +66,7 @@ async function handlePatientClick(patientId) {
 
 function updateSelectedState() {
   document.querySelectorAll('.patient-item').forEach(item => {
-    const isSelected = Number(item.dataset.patientId) === selectedPatientId;
+    const isSelected = String(item.dataset.patientId) === String(selectedPatientId);
     item.classList.toggle('is-selected', isSelected);
     item.setAttribute('aria-selected', String(isSelected));
   });
@@ -78,7 +78,7 @@ async function loadPatientReport(patientId) {
 
   try {
     const imageUrl = await getPatientReport(patientId);
-    const patient  = allPatients.find(p => p.id === patientId);
+    const patient  = allPatients.find(p => String(p.id) === String(patientId));
     const altText  = patient ? `Relatório de ${patient.nome}` : 'Relatório do paciente';
 
     panelEl.innerHTML = `

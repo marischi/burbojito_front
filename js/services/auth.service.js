@@ -1,16 +1,11 @@
 /**
  * Authentication service.
- * All methods simulate network latency and will be replaced by real fetch calls.
  */
 
-import { MOCK_USERS } from '../../mock/mock-data.js';
+import { apiPost } from './api.client.js';
+import { normalizeUser } from './api.adapters.js';
 
 const SESSION_KEY = 'burbojito_user';
-const SIMULATED_DELAY_MS = 600;
-
-function delay(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
 
 /**
  * @param {string} email
@@ -18,19 +13,18 @@ function delay(ms) {
  * @returns {Promise<{id: number, nome: string, sobrenome: string, email: string, username: string, telefone: string, role: string}>}
  */
 export async function login(email, password) {
-  await delay(SIMULATED_DELAY_MS);
+  const response = await apiPost('/api/login/', {
+    email: email.trim().toLowerCase(),
+    password,
+  });
 
-  const user = MOCK_USERS.find(
-    u => u.email === email.trim().toLowerCase() && u.password === password,
-  );
-
-  if (!user) {
+  const user = normalizeUser(response?.user ?? response);
+  if (!user.id && !user.email) {
     throw new Error('E-mail ou senha incorretos. Tente novamente.');
   }
 
-  const { password: _pwd, ...safeUser } = user;
-  sessionStorage.setItem(SESSION_KEY, JSON.stringify(safeUser));
-  return safeUser;
+  sessionStorage.setItem(SESSION_KEY, JSON.stringify(user));
+  return user;
 }
 
 /**
@@ -59,6 +53,5 @@ export function getCurrentUser() {
  * @param {object} updatedUser
  */
 export function refreshSessionUser(updatedUser) {
-  const { password: _pwd, ...safeUser } = updatedUser;
-  sessionStorage.setItem(SESSION_KEY, JSON.stringify(safeUser));
+  sessionStorage.setItem(SESSION_KEY, JSON.stringify(updatedUser));
 }
