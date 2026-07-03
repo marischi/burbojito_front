@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=1366">
-  <title>Burbojito — Painel</title>
+  <title>Burbojito — Cadastro de Usuário</title>
   <link rel="icon" type="image/jpeg" href="assets/images/logo.jpeg">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/variables.css">
@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/pages.css">
 </head>
-<body data-page="tablero">
+<body data-page="cadastro-usuario">
 
   <div id="app-shell" class="app-shell">
 
@@ -105,49 +105,65 @@
 
     <!-- ── Main content ──────────────────────────────── -->
     <main class="main-content">
-      <section class="page-section" aria-label="Painel">
-        <div class="tablero-grid">
+      <section class="page-section" aria-label="Cadastro de usuário">
+        <h1 class="profile-page__title">Cadastro de Usuário</h1>
 
-          <!-- Left panel -->
-          <div class="tablero-panel">
-            <h2 class="tablero-panel__title">Pacientes com maior risco</h2>
-            <div id="high-risk-table-container">
-              <div class="loading-state">
-                <span class="spinner"></span>
-                <span>Carregando...</span>
-              </div>
+        <div id="register-alert" class="alert alert--success hidden" role="alert" aria-live="polite"></div>
+
+        <div class="profile-avatar" aria-hidden="true"></div>
+
+        <form id="register-form" class="profile-form" novalidate>
+          <div class="profile-form__row">
+            <div class="form-group">
+              <label for="register-nome" class="form-group__label">Nome</label>
+              <input id="register-nome" type="text" class="form-group__input" autocomplete="given-name" required>
             </div>
-            <div class="tablero-map-area">
-              <img
-                src="assets/images/mapa-brasil.jpeg"
-                alt="Mapa do Brasil com localização dos pacientes"
-                class="tablero-map-area__img"
-              >
+            <div class="form-group">
+              <label for="register-sobrenome" class="form-group__label">Sobrenome</label>
+              <input id="register-sobrenome" type="text" class="form-group__input" autocomplete="family-name" required>
             </div>
           </div>
 
-          <!-- Right panel -->
-          <div class="tablero-panel">
-            <h2 class="tablero-panel__title">Avaliações realizadas</h2>
-            <div id="evaluations-table-container">
-              <div class="loading-state">
-                <span class="spinner"></span>
-                <span>Carregando...</span>
-              </div>
+          <div class="profile-form__row">
+            <div class="form-group">
+              <label for="register-email" class="form-group__label">Email</label>
+              <input id="register-email" type="email" class="form-group__input" autocomplete="email" required>
             </div>
-            <div
-              class="tablero-chart-area"
-              id="chart-container"
-              aria-label="Gráfico de avaliações realizadas"
-            ></div>
+            <div class="form-group">
+              <label for="register-username" class="form-group__label">Username</label>
+              <input id="register-username" type="text" class="form-group__input" autocomplete="username" required>
+            </div>
           </div>
 
-        </div>
+          <div class="profile-form__row">
+            <div class="form-group">
+              <label for="register-telefone" class="form-group__label">Telefone</label>
+              <input id="register-telefone" type="tel" class="form-group__input" autocomplete="tel">
+            </div>
+            <div class="form-group">
+              <label for="register-password" class="form-group__label">Senha</label>
+              <input id="register-password" type="password" class="form-group__input" autocomplete="new-password" required>
+            </div>
+          </div>
+
+          <div class="profile-form__row">
+            <div class="form-group">
+              <label for="register-confirm-password" class="form-group__label">Confirmar senha</label>
+              <input id="register-confirm-password" type="password" class="form-group__input" autocomplete="new-password" required>
+            </div>
+          </div>
+
+          <div class="profile-form__actions">
+            <button type="submit" class="btn btn--save" id="btn-register-user">
+              CADASTRAR USUÁRIO
+            </button>
+          </div>
+        </form>
       </section>
     </main>
 
   </div>
 
-  <script type="module" src="js/features/dashboard/dashboard.js"></script>
+  <script type="module" src="js/features/profile/register-user.js"></script>
 </body>
 </html>

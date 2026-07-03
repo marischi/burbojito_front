@@ -2,7 +2,7 @@
  * Sidebar — toggle collapse and active nav item highlight.
  * Call initSidebar(currentRoute) on every protected page.
  *
- * @param {'tablero'|'pacientes'|'notificacoes'|'ajustes'} currentRoute
+ * @param {'tablero'|'pacientes'|'notificacoes'|'ajustes'|'cadastro-usuario'} currentRoute
  */
 export function initSidebar(currentRoute) {
   const sidebar  = document.getElementById('sidebar');

@@ -2,7 +2,7 @@
  * User profile service.
  */
 
-import { apiGet, apiPut } from './api.client.js';
+import { apiGet, apiPost, apiPut } from './api.client.js';
 import { getCurrentUser, refreshSessionUser } from './auth.service.js';
 import { normalizeUser } from './api.adapters.js';
 
@@ -53,6 +53,24 @@ export async function updateProfile(data) {
   const updatedUser = normalizeUser(response?.user ?? response ?? { ...user, ...data });
   refreshSessionUser(updatedUser);
   return updatedUser;
+}
+
+/**
+ * Creates a new user.
+ * @param {{nome: string, sobrenome: string, email: string, username: string, telefone: string, password: string}} data
+ * @returns {Promise<object>} Created user
+ */
+export async function createUser(data) {
+  const response = await apiPost('/api/user/', {
+    nome: data.nome,
+    sobrenome: data.sobrenome,
+    email: data.email,
+    username: data.username,
+    telefone: data.telefone,
+    password: data.password,
+  });
+
+  return normalizeUser(response?.user ?? response);
 }
 
 /**

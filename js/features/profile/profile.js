@@ -14,6 +14,7 @@ import {
   show,
   hide,
 } from '../../utils/dom-helpers.js';
+import { validateProfileFields } from '../../utils/profile-validation.js';
 
 function init() {
   requireAuth();
@@ -66,8 +67,6 @@ async function handleSaveProfile(event) {
   const saveBtn = getById('btn-save-profile');
 
   clearAlert(alertEl);
-  setButtonDisabled(saveBtn, true);
-  saveBtn.textContent = 'Salvando...';
 
   const data = {
     nome:      getById('profile-nome').value.trim(),
@@ -76,6 +75,16 @@ async function handleSaveProfile(event) {
     username:  getById('profile-username').value.trim(),
     telefone:  getById('profile-telefone').value.trim(),
   };
+
+  const validationErrors = validateProfileFields(data);
+  if (validationErrors.length) {
+    alertEl.className = 'alert alert--error';
+    showAlert(alertEl, validationErrors[0]);
+    return;
+  }
+
+  setButtonDisabled(saveBtn, true);
+  saveBtn.textContent = 'Salvando...';
 
   try {
     await updateProfile(data);

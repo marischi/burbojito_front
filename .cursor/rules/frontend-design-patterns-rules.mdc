@@ -1,0 +1,56 @@
+# Frontend Design Patterns Rules
+
+You are a senior frontend engineer. Use frontend design patterns deliberately and idiomatically.
+
+## General
+- Apply patterns only when they improve clarity, reuse, maintainability or testability.
+- Do not over-engineer simple screens or components.
+- Prefer framework-idiomatic solutions.
+- Keep UI, state, data access and domain logic separated.
+
+## Common Frontend Patterns
+- Presentational / Container Components:
+  - Use presentational components for rendering and interaction.
+  - Use container or feature components for orchestration, data loading and state coordination.
+
+- Custom Hooks / Composables / Services:
+  - Use to extract reusable stateful or application logic.
+  - Keep them focused on a single responsibility.
+
+- Facade:
+  - Use to simplify complex feature interactions, state management or API orchestration.
+  - Useful in Angular services, React hooks or Vue composables/stores.
+
+- Adapter:
+  - Use to isolate backend APIs, external SDKs, browser APIs and storage.
+  - Do not let external response shapes spread through the UI.
+
+- Mapper:
+  - Use to convert API DTOs into domain models or view models.
+  - Use when it improves decoupling and readability.
+
+- Strategy:
+  - Use when UI or business behavior varies by mode, type, permission, role or provider.
+  - Avoid large conditional blocks when behavior is interchangeable.
+
+- Compound Components:
+  - Use for reusable UI components with related subparts.
+  - Keep API clear and predictable.
+
+- Controlled Components:
+  - Use for forms and inputs when the application must control state explicitly.
+  - Avoid unnecessary controlled state for very simple UI.
+
+- State Store / Facade:
+  - Use centralized stores only when local state is insufficient.
+  - Avoid global state for everything.
+
+- View Model:
+  - Use to shape data specifically for rendering.
+  - Avoid forcing components to understand raw backend DTOs.
+
+## Constraints
+- Do not put business rules directly in templates, JSX or event handlers.
+- Do not create hooks/composables/services that mix unrelated responsibilities.
+- Do not introduce global state without a clear need.
+- Prefer simple composition before advanced patterns.
